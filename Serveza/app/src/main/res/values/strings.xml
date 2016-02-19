@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Serveza</string>
+    <string name="LogInText">Log In</string>
+    <string name="RegisterText">No account yet?</string>
+    <string name="LoginText">Login</string>
+    <string name="PasswordText">Password</string>
+
+
+    <string name="HomeText">Home</string>
+    <string name="HistoryText">History</string>
+    <string name="MyBeersText">My Beers</string>
+    <string name="MyBarsText">My Bars</string>
+
+    <string name="ManageText">Manage</string>
+    <string name="ManageAccountText">Manage Account</string>
+    <string name="logoutText">Logout</string>
+
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

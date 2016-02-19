@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/HomeText" />
+        <item
+            android:id="@+id/nav_beer"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/MyBeersText" />
+        <item
+            android:id="@+id/nav_bar"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/MyBarsText" />
+        <item
+            android:id="@+id/nav_history"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/HistoryText" />
+    </group>
+
+    <item android:title="@string/ManageText">
+        <menu>
+            <item
+                android:id="@+id/nav_manage"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/ManageAccountText" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/logoutText" />
+        </menu>
+    </item>
+
+</menu>
