@@ -1,11 +1,13 @@
 package com.serveza.lepet.serveza;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,26 +18,39 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.serveza.lepet.serveza.Classes.Core;
+import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.Fragments.BarFragment;
 import com.serveza.lepet.serveza.Fragments.BeerFragment;
+import com.serveza.lepet.serveza.Fragments.BeerListFragment;
 import com.serveza.lepet.serveza.Fragments.HistoryFragment;
 import com.serveza.lepet.serveza.Fragments.HomeFragment;
+import com.serveza.lepet.serveza.Fragments.ManageFragment;
+import com.serveza.lepet.serveza.Utils.ImageUtils;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
-                    HomeFragment.OnFragmentInteractionListener,
-                    BarFragment.OnFragmentInteractionListener,
-                    BeerFragment.OnFragmentInteractionListener,
-                    HistoryFragment.OnFragmentInteractionListener,
-                    ManageFragment.OnFragmentInteractionListener{
+        HomeFragment.OnFragmentInteractionListener,
+        BarFragment.OnFragmentInteractionListener,
+        BeerFragment.OnFragmentInteractionListener,
+        HistoryFragment.OnFragmentInteractionListener,
+        ManageFragment.OnFragmentInteractionListener,
+        BeerListFragment.OnFragmentInteractionListener{
 
     private FrameLayout Fragment_Contener;
+
+    private NavigationView navigationView;
+
+    private Core core;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
@@ -55,12 +70,32 @@ public class HomeActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_home);
-        setFragmen(new HomeFragment());
+        setFragment(new HomeFragment());
         navigationView.setNavigationItemSelectedListener(this);
 
-        Fragment_Contener = (FrameLayout)findViewById(R.id.fragment_container);
+        Fragment_Contener = (FrameLayout) findViewById(R.id.fragment_container);
+        Init();
+        SetElement();
+    }
+
+    private void Init() {
+        Intent i = getIntent();
+        core = (Core) i.getSerializableExtra("Core");
+
+    }
+
+    private void SetElement() {
+        TextView userNameText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.UserNameText);
+        userNameText.setText(core.user.get_firstName() + " " + core.user.get_lastName());
+        TextView userMailText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.UserMailText);
+        userMailText.setText(core.user.get_mailAdrress());
+
+      /*  ImageUtils.SetImageViewByUrl((ImageView)navigationView.getHeaderView(0).findViewById(R.id.UserImage),
+                core.user.get_imageURL());*/
+
+
     }
 
     @Override
@@ -95,20 +130,16 @@ public class HomeActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    private void setFragmen(Fragment framgement)
-    {
+    private void setFragment(Fragment framgement) {
 
         framgement.setArguments(getIntent().getExtras());
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-          transaction.replace(R.id.fragment_container, framgement);
+        transaction.replace(R.id.fragment_container, framgement);
         transaction.addToBackStack(null);
 
-        // Commit the transaction
         transaction.commit();
-     //   getSupportFragmentManager().beginTransaction()
-       //         .add(R.id.fragment_container, framgement).commit();
-    }
+      }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -117,21 +148,21 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-           setFragmen(new HomeFragment());
+            setFragment(new HomeFragment());
         } else if (id == R.id.nav_bar) {
-            setFragmen(new BarFragment());
+            setFragment(new BarFragment());
 
         } else if (id == R.id.nav_beer) {
-            setFragmen(new BeerFragment());
+            setFragment(BeerListFragment.newInstance(core));
 
         } else if (id == R.id.nav_history) {
-            setFragmen(new HistoryFragment());
+            setFragment(new HistoryFragment());
 
         } else if (id == R.id.nav_manage) {
-            setFragmen(new ManageFragment());
+            setFragment(new ManageFragment());
 
         } else if (id == R.id.nav_logout) {
-          //  setFragmen(new HomeFragment());
+            //  setFragmen(new HomeFragment());
 
         }
 

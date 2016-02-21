@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.serveza.lepet.serveza.Classes.Core;
+
 public class LoginActivity extends AppCompatActivity {
 
 
@@ -22,7 +24,11 @@ public class LoginActivity extends AppCompatActivity {
     {
         Log.d(ACTIVITYNAME, "Login");
 
-        startActivity(new Intent(this, HomeActivity.class));
+        Core core = new Core();
+        core.Init();
+        Intent i = new Intent(this, HomeActivity.class);
+        i.putExtra("Core", core);
+        startActivity(i);
     }
 
     public void Register(View view)
