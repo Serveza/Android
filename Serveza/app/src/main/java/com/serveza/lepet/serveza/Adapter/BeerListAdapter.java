@@ -1,18 +1,18 @@
 package com.serveza.lepet.serveza.Adapter;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.serveza.lepet.serveza.BeerActivity;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.R;
+import com.serveza.lepet.serveza.Utils.ImageDownloader;
 
 /**
  * Created by lepet on 2/21/2016.
@@ -25,7 +25,7 @@ public class BeerListAdapter extends BaseAdapter {
     public BeerListAdapter(Context context, BeerList beerList) {
         this.beerList = beerList;
         this.context = context;
-        inflater = ( LayoutInflater )context.
+        inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -52,12 +52,17 @@ public class BeerListAdapter extends BaseAdapter {
         TextView tv = (TextView) rowView.findViewById(R.id.beerListTemplateName);
         ImageView iw = (ImageView) rowView.findViewById(R.id.beerListTemplateImage);
 
+        ImageDownloader.SetImage(beerList.GetList().get(position).get_image(), iw);
+
         tv.setText(beerList.GetList().get(position).get_name());
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "You Clicked " + beerList.GetList().get(position).get_id(), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, BeerActivity.class);
+                intent.putExtra("Beer", beerList.GetList().get(position));
+                context.startActivity(intent);
+                //Toast.makeText(context, "You Clicked " + beerList.GetList().get(position).get_id(), Toast.LENGTH_LONG).show();
             }
         });
         return rowView;

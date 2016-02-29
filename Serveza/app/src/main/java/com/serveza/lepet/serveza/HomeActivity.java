@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -22,14 +21,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.serveza.lepet.serveza.Classes.Core;
-import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.Fragments.BarFragment;
 import com.serveza.lepet.serveza.Fragments.BeerFragment;
 import com.serveza.lepet.serveza.Fragments.BeerListFragment;
 import com.serveza.lepet.serveza.Fragments.HistoryFragment;
 import com.serveza.lepet.serveza.Fragments.HomeFragment;
 import com.serveza.lepet.serveza.Fragments.ManageFragment;
-import com.serveza.lepet.serveza.Utils.ImageUtils;
+import com.serveza.lepet.serveza.Utils.ImageDownloader;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -92,10 +90,7 @@ public class HomeActivity extends AppCompatActivity
         TextView userMailText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.UserMailText);
         userMailText.setText(core.user.get_mailAdrress());
 
-      /*  ImageUtils.SetImageViewByUrl((ImageView)navigationView.getHeaderView(0).findViewById(R.id.UserImage),
-                core.user.get_imageURL());*/
-
-
+        ImageDownloader.SetImage(core.user.get_imageURL(),(ImageView)navigationView.getHeaderView(0).findViewById(R.id.UserImage));
     }
 
     @Override
