@@ -69,7 +69,7 @@ public class BeerListFragment extends Fragment {
 
         ListView lv = (ListView)thisView.findViewById(R.id.ListBeerOnFragment);
 
-        lv.setAdapter(new BeerListAdapter(this.getContext(), core.userBeerList));
+        lv.setAdapter(new BeerListAdapter(this.getContext(), core.userBeerList, core));
         return thisView;
     }
 

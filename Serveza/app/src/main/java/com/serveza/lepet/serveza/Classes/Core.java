@@ -1,5 +1,6 @@
 package com.serveza.lepet.serveza.Classes;
 
+import com.serveza.lepet.serveza.Classes.Data.BarList;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.Classes.Data.User;
 import com.serveza.lepet.serveza.Classes.Network.Network;
@@ -16,16 +17,15 @@ public class Core implements Serializable {
 
 
     public BeerList userBeerList;
-    public Core()
-    {
-          network = new Network();
+    public BarList userBarList;
 
+    public Core() {
+        network = new Network();
     }
 
-    public void Init()
-    {
+    public void Init() {
         user = User.GetUserLocal();
-        userBeerList = new BeerList();
-        userBeerList.Init();
+        userBeerList = BeerList.GetDebugBeerList();
+        userBarList = BarList.GetDebugBarList();
     }
 }

@@ -1,4 +1,4 @@
-package com.serveza.lepet.serveza;
+package com.serveza.lepet.serveza.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.serveza.lepet.serveza.Activity.HomeActivity;
 import com.serveza.lepet.serveza.Classes.Core;
+import com.serveza.lepet.serveza.R;
 
 public class LoginActivity extends AppCompatActivity {
 

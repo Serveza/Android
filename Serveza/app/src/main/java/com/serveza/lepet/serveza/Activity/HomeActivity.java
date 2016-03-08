@@ -1,5 +1,6 @@
-package com.serveza.lepet.serveza;
+package com.serveza.lepet.serveza.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.serveza.lepet.serveza.Fragments.BeerListFragment;
 import com.serveza.lepet.serveza.Fragments.HistoryFragment;
 import com.serveza.lepet.serveza.Fragments.HomeFragment;
 import com.serveza.lepet.serveza.Fragments.ManageFragment;
+import com.serveza.lepet.serveza.R;
 import com.serveza.lepet.serveza.Utils.ImageDownloader;
 
 public class HomeActivity extends AppCompatActivity
@@ -43,6 +45,7 @@ public class HomeActivity extends AppCompatActivity
     private NavigationView navigationView;
 
     private Core core;
+private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +56,14 @@ public class HomeActivity extends AppCompatActivity
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
+        context = this.getApplicationContext();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Search", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(context, SearchActivity.class);
+                i.putExtra("Core", core);
+                startActivity(i);
             }
         });
 
@@ -145,7 +150,7 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_home) {
             setFragment(new HomeFragment());
         } else if (id == R.id.nav_bar) {
-            setFragment(new BarFragment());
+            setFragment(BarFragment.newInstance(core));
 
         } else if (id == R.id.nav_beer) {
             setFragment(BeerListFragment.newInstance(core));

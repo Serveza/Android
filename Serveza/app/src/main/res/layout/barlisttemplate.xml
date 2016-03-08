@@ -5,7 +5,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/beerListTemplateImage"
+        android:id="@+id/BarListTemplateImage"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
@@ -19,18 +19,19 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/beerListTemplateName"
+            android:id="@+id/BarListTemplateName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
             android:textSize="@dimen/text_size_title" />
 
         <TextView
-            android:id="@+id/beerListTemplateBrower"
+            android:id="@+id/BarListTemplateDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2.5dp"
-            android:text="Brower"
+            android:text="Distance"
             android:textSize="@dimen/text_size_content" />
     </LinearLayout>
+
 </LinearLayout>

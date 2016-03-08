@@ -11,34 +11,35 @@ import android.widget.TextView;
 
 import com.serveza.lepet.serveza.Activity.BeerActivity;
 import com.serveza.lepet.serveza.Classes.Core;
+import com.serveza.lepet.serveza.Classes.Data.BarList;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.R;
 import com.serveza.lepet.serveza.Utils.ImageDownloader;
 import com.serveza.lepet.serveza.Utils.TextViewUtils;
 
 /**
- * Created by lepet on 2/21/2016.
+ * Created by lepet on 3/4/2016.
  */
-public class BeerListAdapter extends BaseAdapter {
+public class BarListAdapter extends BaseAdapter {
     private Context context;
-    private BeerList beerList;
+    private BarList barList;
     private static LayoutInflater inflater = null;
     private Core core;
 
     private int TemplateID;
 
-    public BeerListAdapter(Context context, BeerList beerList, Core core) {
-        this.beerList = beerList;
+    public BarListAdapter(Context context, BarList barList, Core core) {
+        this.barList = barList;
         this.context = context;
         this.core = core;
-        this.TemplateID = R.layout.beerlisttemplate;
+        this.TemplateID = R.layout.barlisttemplate;
         inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
-    public BeerListAdapter(Context context, BeerList beerList, Core core, int TemplateID) {
-        this.beerList = beerList;
+    public BarListAdapter(Context context, BarList barList, Core core, int TemplateID) {
+        this.barList = barList;
         this.context = context;
         this.core = core;
         this.TemplateID = TemplateID;
@@ -46,10 +47,9 @@ public class BeerListAdapter extends BaseAdapter {
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-
     public int getCount() {
         // TODO Auto-generated method stub
-        return beerList.GetList().size();
+        return barList.getList().size();
     }
 
     @Override
@@ -67,18 +67,21 @@ public class BeerListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = inflater.inflate(TemplateID, null);
 
-        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.beerListTemplateName), beerList.GetList().get(position).get_name());
-        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.beerListTemplateBrower), beerList.GetList().get(position).get_product());
-        ImageDownloader.SetImage(beerList.GetList().get(position).get_image(), (ImageView) rowView.findViewById(R.id.beerListTemplateImage));
+
+        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.BarListTemplateName), barList.getList().get(position).getName());
+        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.BarListTemplateDistance),
+                String.valueOf(barList.getList().get(position).GetDistanceFrom()) + "km");
+        ImageDownloader.SetImage(barList.getList().get(position).getImage(), (ImageView) rowView.findViewById(R.id.BarListTemplateImage));
+
+
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, BeerActivity.class);
-                intent.putExtra("Beer", beerList.GetList().get(position));
+                intent.putExtra("Bar", barList.getList().get(position));
                 intent.putExtra("Core", core);
-                context.startActivity(intent);
-                //Toast.makeText(context, "You Clicked " + beerList.GetList().get(position).get_id(), Toast.LENGTH_LONG).show();
+            //    context.startActivity(intent);
             }
         });
         return rowView;
