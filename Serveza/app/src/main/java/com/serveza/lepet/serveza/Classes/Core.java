@@ -2,6 +2,7 @@ package com.serveza.lepet.serveza.Classes;
 
 import com.serveza.lepet.serveza.Classes.Data.BarList;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
+import com.serveza.lepet.serveza.Classes.Data.EventList;
 import com.serveza.lepet.serveza.Classes.Data.User;
 import com.serveza.lepet.serveza.Classes.Network.Network;
 
@@ -18,6 +19,7 @@ public class Core implements Serializable {
 
     public BeerList userBeerList;
     public BarList userBarList;
+    public EventList userEventList;
 
     public Core() {
         network = new Network();
@@ -27,5 +29,6 @@ public class Core implements Serializable {
         user = User.GetUserLocal();
         userBeerList = BeerList.GetDebugBeerList();
         userBarList = BarList.GetDebugBarList();
+        userEventList = EventList.GenerateEventList(userBarList);
     }
 }

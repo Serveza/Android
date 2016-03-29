@@ -75,7 +75,7 @@ private Context context;
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setCheckedItem(R.id.nav_home);
-        setFragment(new HomeFragment());
+        setFragment(HomeFragment.newInstance(core));
         navigationView.setNavigationItemSelectedListener(this);
 
         Fragment_Contener = (FrameLayout) findViewById(R.id.fragment_container);
@@ -148,7 +148,7 @@ private Context context;
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            setFragment(new HomeFragment());
+            setFragment(HomeFragment.newInstance(core));
         } else if (id == R.id.nav_bar) {
             setFragment(BarFragment.newInstance(core));
 

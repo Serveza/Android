@@ -11,4 +11,7 @@
 
     <dimen name="text_size_title">20dp</dimen>
     <dimen name="text_size_content">15dp</dimen>
+
+
+
 </resources>
