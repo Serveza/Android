@@ -18,6 +18,10 @@ import com.serveza.lepet.serveza.R;
 import com.serveza.lepet.serveza.Utils.ImageDownloader;
 import com.serveza.lepet.serveza.Utils.TextViewUtils;
 
+import java.lang.ref.Reference;
+import java.util.Set;
+import java.util.concurrent.Callable;
+
 public class BeerActivity extends AppCompatActivity {
 
     private Core core;
@@ -41,7 +45,14 @@ public class BeerActivity extends AppCompatActivity {
 
         InitTab();
         GetValueSerializable();
-        SetElements();
+        Reference<Beer> beerReference;
+
+        core.network.GetInfoBeer(this.getApplicationContext(), core, new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return SetElements();
+            }
+        }, beer);
     }
 
     private void InitTab() {
@@ -70,7 +81,7 @@ public class BeerActivity extends AppCompatActivity {
         beer = (Beer) i.getSerializableExtra("Beer");
     }
 
-    private void SetElements() {
+    private int SetElements() {
         TextViewUtils.SetText((TextView) (findViewById(R.id.BeerName)), beer.get_name());
         TextViewUtils.SetText((TextView) (findViewById(R.id.BeerBrowerName)), beer.get_product());
         TextViewUtils.SetText((TextView) (findViewById(R.id.BeerDegreName)), String.valueOf(beer.get_degre()) + "%");
@@ -78,5 +89,6 @@ public class BeerActivity extends AppCompatActivity {
         TextViewUtils.SetText((TextView) (findViewById(R.id.BeerInformation)), beer.get_desc());
 
         ImageDownloader.SetImage(beer.get_image(), (ImageView) (findViewById(R.id.BeerImage)));
+        return 0;
     }
 }

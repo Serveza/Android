@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.serveza.lepet.serveza.Classes.Core;
+import com.serveza.lepet.serveza.Classes.LocalDatas.KeyValue;
 import com.serveza.lepet.serveza.Fragments.BarFragment;
 import com.serveza.lepet.serveza.Fragments.BeerFragment;
 import com.serveza.lepet.serveza.Fragments.BeerListFragment;
@@ -38,14 +39,16 @@ public class HomeActivity extends AppCompatActivity
         BeerFragment.OnFragmentInteractionListener,
         HistoryFragment.OnFragmentInteractionListener,
         ManageFragment.OnFragmentInteractionListener,
-        BeerListFragment.OnFragmentInteractionListener{
+        BeerListFragment.OnFragmentInteractionListener {
 
     private FrameLayout Fragment_Contener;
 
     private NavigationView navigationView;
 
     private Core core;
-private Context context;
+    private Context context;
+
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ private Context context;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
-
+        count = 0;
         context = this.getApplicationContext();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +98,7 @@ private Context context;
         TextView userMailText = (TextView) navigationView.getHeaderView(0).findViewById(R.id.UserMailText);
         userMailText.setText(core.user.get_mailAdrress());
 
-        ImageDownloader.SetImage(core.user.get_imageURL(),(ImageView)navigationView.getHeaderView(0).findViewById(R.id.UserImage));
+        ImageDownloader.SetImage(core.user.get_imageURL(), (ImageView) navigationView.getHeaderView(0).findViewById(R.id.UserImage));
     }
 
     @Override
@@ -137,9 +140,9 @@ private Context context;
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, framgement);
         transaction.addToBackStack(null);
-
+        count++;
         transaction.commit();
-      }
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -162,8 +165,9 @@ private Context context;
             setFragment(new ManageFragment());
 
         } else if (id == R.id.nav_logout) {
-            //  setFragmen(new HomeFragment());
-
+            KeyValue.putValue(this.getApplicationContext(), "api_token", "");
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

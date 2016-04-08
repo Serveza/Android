@@ -7,45 +7,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.serveza.lepet.serveza.Activity.BeerActivity;
 import com.serveza.lepet.serveza.Classes.Core;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
+import com.serveza.lepet.serveza.Classes.LocalDatas.DataBase;
 import com.serveza.lepet.serveza.R;
 import com.serveza.lepet.serveza.Utils.ImageDownloader;
 import com.serveza.lepet.serveza.Utils.TextViewUtils;
 
 /**
- * Created by lepet on 2/21/2016.
+ * Created by lepet on 4/7/2016.
  */
-public class BeerListAdapter extends BaseAdapter {
+public class BeerListSearchAdapter extends BaseAdapter {
+
     private Context context;
     private BeerList beerList;
     private static LayoutInflater inflater = null;
     private Core core;
 
-    private int TemplateID;
-
-    public BeerListAdapter(Context context, BeerList beerList, Core core) {
+    public BeerListSearchAdapter(Context context, BeerList beerList, Core core) {
         this.beerList = beerList;
         this.context = context;
         this.core = core;
-        this.TemplateID = R.layout.barlisttemplate;
-        inflater = (LayoutInflater) context.
-                getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-    }
-
-    public BeerListAdapter(Context context, BeerList beerList, Core core, int TemplateID) {
-        this.beerList = beerList;
-        this.context = context;
-        this.core = core;
-        this.TemplateID = TemplateID;
         inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
-
 
     public int getCount() {
         // TODO Auto-generated method stub
@@ -65,11 +55,10 @@ public class BeerListAdapter extends BaseAdapter {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View rowView = inflater.inflate( R.layout.beerlisttemplate, null);
+        View rowView = inflater.inflate(R.layout.beer_list_search_result_template, null);
 
-        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.beerListTemplateName), beerList.GetList().get(position).get_name());
-        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.beerListTemplateBrower), beerList.GetList().get(position).get_product());
-        ImageDownloader.SetImage(beerList.GetList().get(position).get_image(), (ImageView) rowView.findViewById(R.id.beerListTemplateImage));
+        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.searchResultName), beerList.GetList().get(position).get_name());
+        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.searchResultInformation), "");
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,4 +74,9 @@ public class BeerListAdapter extends BaseAdapter {
         return rowView;
     }
 
+
+    public static void setAdapter(Context context, BeerList beerList, Core core, ListView listView) {
+        BeerListSearchAdapter blsa = new BeerListSearchAdapter(context, beerList, core);
+        listView.setAdapter(blsa);
+    }
 }

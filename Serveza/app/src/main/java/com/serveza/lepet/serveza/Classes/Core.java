@@ -4,6 +4,7 @@ import com.serveza.lepet.serveza.Classes.Data.BarList;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.Classes.Data.EventList;
 import com.serveza.lepet.serveza.Classes.Data.User;
+import com.serveza.lepet.serveza.Classes.LocalDatas.DataBase;
 import com.serveza.lepet.serveza.Classes.Network.Network;
 
 import java.io.Serializable;
@@ -26,7 +27,7 @@ public class Core implements Serializable {
     }
 
     public void Init() {
-        user = User.GetUserLocal();
+        // user = User.GetUserLocal();
         userBeerList = BeerList.GetDebugBeerList();
         userBarList = BarList.GetDebugBarList();
         userEventList = EventList.GenerateEventList(userBarList);

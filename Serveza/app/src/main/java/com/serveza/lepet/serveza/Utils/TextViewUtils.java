@@ -11,4 +11,8 @@ public class TextViewUtils {
     {
         textView.setText(Text);
     }
+    public static String GetText(TextView textView)
+    {
+        return textView.getText().toString();
+    }
 }

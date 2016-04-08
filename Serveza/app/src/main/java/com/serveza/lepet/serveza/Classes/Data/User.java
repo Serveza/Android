@@ -1,5 +1,8 @@
 package com.serveza.lepet.serveza.Classes.Data;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -27,6 +30,18 @@ public class User implements Serializable {
                 "https://scontent-lax3-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10922803_10208019930037378_4351704227098544776_n.jpg?_nc_eui=ARgto1Sb1gJo5cmXbO1Y-gSwKBQT6TzpZHO4cc4u5Tjp76ChjqszwA&oh=52aee323d241906b9c041bf7f1cd795f&oe=572885D7", "thomas.caron@epitech.eu");
     }
 
+    public static User GetUser(JSONObject object, String mail){
+        try
+        {
+            String firstName = object.getString("firstname");
+            String lastName = object.getString("lastname");
+            String image = object.getString("avatar");
+            return new User(firstName, lastName, image,mail);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     //Get Set
 

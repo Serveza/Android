@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".Activity.RegistrerActivity">
+
+
+    <ImageView
+        android:id="@+id/imageRegisterView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="34dp"
+        android:src="@mipmap/ic_launcher"
+        android:onClick="FindImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/maillayout" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="FacebookClick"
+        android:text="F"
+        android:textSize="40dp"
+
+        android:textColor="@color/icons"
+        android:layout_above="@+id/maillayout"
+        android:layout_alignEnd="@+id/maillayout" />
+
+    <LinearLayout
+        android:id="@+id/maillayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageRegisterView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/LoginText"
+            android:textColor="@color/icons" />
+
+        <EditText
+            android:id="@+id/mailEntryRegisterEntry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/firstnameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/maillayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/FirstNameText"
+            android:textColor="@color/icons" />
+
+        <EditText
+            android:id="@+id/firstNameEntryRegisterEntry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LastnameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/firstnameLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/LastNameText"
+            android:textColor="@color/icons" />
+
+        <EditText
+            android:id="@+id/lastNameRegisterEntry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LastnameLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PasswordText"
+            android:textColor="@color/icons" />
+
+        <EditText
+            android:id="@+id/passwordRegisterEntry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/passwordRetypeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/passwordLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PasswordretryText"
+            android:textColor="@color/icons" />
+
+        <EditText
+            android:id="@+id/passwordRetypeRegisterEntry"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/passwordRetypeLayout"
+        android:layout_below="@+id/passwordRetypeLayout"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="RegisterClick"
+        android:text="@string/registerText"
+        android:textColor="@color/icons" />
+
+
+</RelativeLayout>

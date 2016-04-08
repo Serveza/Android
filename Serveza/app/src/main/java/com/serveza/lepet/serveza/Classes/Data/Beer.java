@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * Created by lepet on 2/21/2016.
  */
-public class Beer implements Serializable {
 
+public class Beer implements Serializable {
 
 
     public int _id;
@@ -25,6 +25,11 @@ public class Beer implements Serializable {
         this._degre = _degre;
         this._product = _product;
         this._price = _price;
+    }
+
+    public Beer(int id, String name) {
+        this._id = id;
+        this._name = name;
     }
 
     //get set
@@ -84,7 +89,6 @@ public class Beer implements Serializable {
     public void set_price(double _price) {
         this._price = _price;
     }
-
 
 
 }

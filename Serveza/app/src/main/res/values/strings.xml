@@ -2,9 +2,12 @@
     <string name="app_name">Serveza</string>
     <string name="LogInText">Log In</string>
     <string name="RegisterText">No account yet?</string>
-    <string name="LoginText">Login</string>
+    <string name="LoginText">Mail</string>
     <string name="PasswordText">Password</string>
-
+    <string name="FirstNameText">Firstname</string>
+    <string name="LastNameText">Lastname</string>
+    <string name="PasswordretryText">Password (retype)</string>
+    <string name="registerText">register</string>
 
     <string name="HomeText">Home</string>
     <string name="HistoryText">History</string>
