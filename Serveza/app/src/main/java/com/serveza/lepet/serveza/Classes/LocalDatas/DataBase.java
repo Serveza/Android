@@ -21,6 +21,7 @@ public class DataBase extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "beer";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_IMAGE = "image";
 
 
     public DataBase(Context context) {
@@ -32,7 +33,7 @@ public class DataBase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(
                 "create table " + TABLE_NAME +
-                        "( " + COLUMN_ID + " integer , " + COLUMN_NAME + " text)"
+                        "( " + COLUMN_ID + " integer , " + COLUMN_NAME + " text, " + COLUMN_IMAGE + " text)"
         );
     }
 
@@ -54,6 +55,8 @@ public class DataBase extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_ID, beer.get_id());
         contentValues.put(COLUMN_NAME, beer.get_name());
+        contentValues.put(COLUMN_IMAGE, beer.get_image());
+
         db.insert(TABLE_NAME, null, contentValues);
         return true;
     }
@@ -78,7 +81,7 @@ public class DataBase extends SQLiteOpenHelper {
         res.moveToFirst();
 
         while (res.isAfterLast() == false) {
-            list.Add(new Beer(res.getInt(0), res.getString(1)));
+            list.Add(new Beer(res.getInt(0), res.getString(1), res.getString(2)));
             res.moveToNext();
         }
         return list;

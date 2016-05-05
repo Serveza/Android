@@ -1,5 +1,12 @@
 package com.serveza.lepet.serveza.Classes.Data;
 
+import com.serveza.lepet.serveza.Utils.Converter;
+import com.serveza.lepet.serveza.Utils.GetCoor;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,4 +52,32 @@ public class BarList implements Serializable {
         bl.Init();
         return bl;
     }
+
+    public BarList GetBarListByBeer(BeerList list) {
+        BarList barList = new BarList();
+        for (int indexBar = 0; indexBar < this.list.size(); indexBar++) {
+            if (this.list.get(indexBar).ContaineThis(list))
+                barList.Add(this.list.get(indexBar));
+        }
+        return this;
+    }
+
+    public static BarList GetBarList(JSONArray array) {
+        BarList barList = new BarList();
+        JSONObject tmp;
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                tmp = array.getJSONObject(i);
+
+                barList.Add(new Bar(tmp.getString("name"), tmp.getString("image"),
+                        tmp.getInt("id"), GetCoor.GetLongitude(tmp.getString("position")),
+                        GetCoor.GetLatidude(tmp.getString("position"))));
+                barList.getList().get(i).Carte(tmp.getJSONArray("carte"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return barList;
+    }
+
 }

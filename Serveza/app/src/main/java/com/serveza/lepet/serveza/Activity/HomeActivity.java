@@ -158,9 +158,6 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_beer) {
             setFragment(BeerListFragment.newInstance(core));
 
-        } else if (id == R.id.nav_history) {
-            setFragment(new HistoryFragment());
-
         } else if (id == R.id.nav_manage) {
             setFragment(new ManageFragment());
 

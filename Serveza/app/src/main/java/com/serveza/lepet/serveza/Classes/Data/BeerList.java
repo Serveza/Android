@@ -55,7 +55,7 @@ public class BeerList implements Serializable {
         try {
             for (int i = 0; i < object.length(); i++) {
                 tmp = object.getJSONObject(i);
-                ret.Add(new Beer(tmp.getInt("id"), tmp.getString("name")));
+                ret.Add(new Beer(tmp.getInt("id"), tmp.getString("name"), tmp.getString("image")));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -70,11 +70,23 @@ public class BeerList implements Serializable {
         try {
             for (int i = 0; i < object.length(); i++) {
                 tmp = object.getJSONObject(i);
-                db.insertBeer(new Beer(tmp.getInt("id"), tmp.getString("name")));
+                db.insertBeer(new Beer(tmp.getInt("id"),
+                            tmp.getString("name"),
+                            tmp.getString("image")));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return db;
+    }
+
+    public boolean contain(Beer beer)
+    {
+        for (int i = 0; i < _list.size(); i++)
+        {
+            if (_list.get(i).get_id() == beer.get_id())
+                return true;
+        }
+        return false;
     }
 }

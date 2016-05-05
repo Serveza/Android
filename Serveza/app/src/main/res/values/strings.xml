@@ -127,4 +127,11 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
+    <string name="addCommentText">Add comment</string>
+    <string name="yourCommentText">Your comment</string>
+    <string name="yourNoteText">Your Note</string>
+
+    <string name="SendText">Send</string>
+    <string name="CancelText">Cancel</string>
+    <string name="selectyournoteText">Select your note</string>
 </resources>

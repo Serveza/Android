@@ -14,10 +14,7 @@
             android:id="@+id/nav_bar"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/MyBarsText" />
-        <item
-            android:id="@+id/nav_history"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/HistoryText" />
+
     </group>
 
     <item android:title="@string/ManageText">

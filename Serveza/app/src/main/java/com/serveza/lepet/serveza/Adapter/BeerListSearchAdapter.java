@@ -55,10 +55,10 @@ public class BeerListSearchAdapter extends BaseAdapter {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View rowView = inflater.inflate(R.layout.beer_list_search_result_template, null);
+        View rowView = inflater.inflate(R.layout.beerlisttemplate, null);
 
-        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.searchResultName), beerList.GetList().get(position).get_name());
-        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.searchResultInformation), "");
+        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.beerListTemplateName), beerList.GetList().get(position).get_name());
+        ImageDownloader.SetImage(beerList.GetList().get(position).get_image(), (ImageView) rowView.findViewById(R.id.beerListTemplateImage));
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override

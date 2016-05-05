@@ -1,5 +1,11 @@
 package com.serveza.lepet.serveza.Classes.Data;
 
+import com.serveza.lepet.serveza.Utils.Converter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -9,12 +15,20 @@ public class Bar  implements Serializable {
 
     private String name;
     private String image;
+    private String address;
     private String webSiteURL;
     private int ID;
     private double longitude;
     private double latitude;
     private BeerList beerList;
 
+    public Bar(String name, String image, int ID, double longitude, double latitude) {
+        this.name = name;
+        this.image = image;
+        this.ID = ID;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 
     public Bar(String name, String image, String webSiteURL, int ID, double longitude, double latitude) {
         this.name = name;
@@ -27,11 +41,52 @@ public class Bar  implements Serializable {
         beerList = BeerList.GetDebugBeerList();
     }
 
+    public boolean ContaineThis(BeerList list)
+    {
+        for (int i = 0; i < list.GetList().size(); i++)
+        {
+            if (!this.beerList.contain(list.GetList().get(i)))
+                return false;
+        }
+        return true;
+    }
+
+
+
+    public void Carte(JSONArray array) {
+        JSONObject tmp;
+        try {
+            for (int i = 0; i < array.length(); i++) {
+                tmp = array.getJSONObject(i);
+
+                beerList.Add(new Beer(tmp.getInt("id"), tmp.getString("name"), tmp.getString("image")
+                        , Converter.GetPrice(tmp.getString("price"))));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
     public Double GetDistanceFrom()
     {
         return 0.0;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public BeerList getBeerList() {
+        return beerList;
+    }
+
+    public void setBeerList(BeerList beerList) {
+        this.beerList = beerList;
+    }
 
     public String getName() {
         return name;

@@ -17,6 +17,8 @@ public class Beer implements Serializable {
     public String _product;
     public double _price;
 
+    public CommentList commentList;
+
     public Beer(int _id, String _name, String _image, String _desc, double _degre, String _product, double _price) {
         this._id = _id;
         this._name = _name;
@@ -27,10 +29,19 @@ public class Beer implements Serializable {
         this._price = _price;
     }
 
-    public Beer(int id, String name) {
+    public Beer(int id, String name, String Image) {
         this._id = id;
         this._name = name;
+        this._image = Image;
     }
+
+    public Beer(int id, String name, String Image, double price) {
+        this._id = id;
+        this._name = name;
+        this._image = Image;
+        this._price = price;
+    }
+
 
     //get set
 

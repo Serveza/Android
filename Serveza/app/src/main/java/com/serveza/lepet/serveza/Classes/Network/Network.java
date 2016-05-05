@@ -15,6 +15,12 @@ import com.serveza.lepet.serveza.Classes.Network.request.GetBeerInfo;
 import com.serveza.lepet.serveza.Classes.Network.request.Login;
 import com.serveza.lepet.serveza.Classes.Network.request.Register;
 import com.serveza.lepet.serveza.Classes.Network.request.getAllBeer;
+import com.serveza.lepet.serveza.Classes.Network.request.getBeerComment;
+import com.serveza.lepet.serveza.Classes.Network.request.getFavBeer;
+import com.serveza.lepet.serveza.Classes.Network.request.getLocalBar;
+import com.serveza.lepet.serveza.Classes.Network.request.sendComment;
+import com.serveza.lepet.serveza.Classes.Network.request.setFavBeer;
+import com.serveza.lepet.serveza.Classes.Settings.Settings;
 
 import java.io.Serializable;
 import java.lang.ref.Reference;
@@ -31,9 +37,6 @@ public class Network implements Serializable {
 
     }
 
-    public User GetUser() {
-        return User.GetUserLocal();
-    }
 
     public void GetInfoBeer(Context context, Core core, Callable<Integer> callable, Beer beer) {
         GetBeerInfo getBeerInfo = new GetBeerInfo(context, core, callable, beer);
@@ -56,7 +59,37 @@ public class Network implements Serializable {
     public void Register(Context context, Core core, String mail, String firstname, String lastname, String passworld, String image, Callable<Integer> callable) {
         Register register = new Register(context, core, callable);
         register.SetParam(mail, firstname, lastname, passworld, image);
-        Log.d("register", "request start");
         register.execute();
+    }
+
+    public void SetFavBeer(Context context, Core core, int ID) {
+        setFavBeer sfb = new setFavBeer(context, core, null);
+        sfb.SetParma(ID, Token);
+
+        sfb.execute();
+    }
+
+    public void GetFavBeer(Context context, Core core, Callable<Integer> callback) {
+        getFavBeer gfb = new getFavBeer(context, core, callback);
+        gfb.SetParam(Token);
+        gfb.execute();
+    }
+
+    public void GetBeerComment(Context context, Core core, Callable<Integer> callable, Beer beer) {
+        getBeerComment getBeerComment = new getBeerComment(context, core, callable, beer);
+        getBeerComment.execute();
+    }
+
+    public void SendComment(Context context, Core core, Callable<Integer> callable, String link, String comment, int note) {
+        sendComment sendComment = new sendComment(context, core, link, callable);
+        sendComment.SetParam(Token, comment, note);
+        sendComment.execute();
+    }
+
+    public void GetLocalBar(Context context, Core core, Callable<Integer> callable, double longitude, double latitude) {
+        getLocalBar getLocalBar = new getLocalBar(context, core, callable);
+        getLocalBar.SetParam(longitude, latitude, Settings.GetRange(context));
+        Log.d("GetLocalBar", "execute");
+        getLocalBar.execute();
     }
 }
