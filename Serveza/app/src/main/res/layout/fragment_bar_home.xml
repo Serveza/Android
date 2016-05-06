@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.BeerActivityFragment.BeerHomeFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.serveza.lepet.serveza.Fragments.BarActivityFragment.BarHomeFragment">
 
-      <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -13,7 +13,7 @@
         android:layout_marginRight="16dp">
 
         <ImageView
-            android:id="@+id/BeerImage"
+            android:id="@+id/BarImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@mipmap/ic_launcher" />
@@ -26,26 +26,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/BeerName"
+                android:id="@+id/BarName"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="name"
+                android:gravity="center"
                 android:textSize="@dimen/text_size_title" />
 
-            <TextView
-                android:id="@+id/BeerBrowerName"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Brower"
-                android:textSize="@dimen/text_size_content" />
 
-            <TextView
-                android:id="@+id/BeerDegreName"
+            <Button
+                android:id="@+id/buttonGoBar"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="0%"
+                android:text="@string/go_event"
                 android:textSize="@dimen/text_size_content" />
 
         </LinearLayout>
@@ -64,17 +58,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Description"
+            android:text="@string/BeerTitle"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/text_size_title"/>
-
-        <TextView
-            android:id="@+id/BeerInformation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ListView
+            android:id="@+id/beerListView"
+            android:scrollbars="vertical"
             android:layout_marginTop="10dp"
-            android:text="Description"
-            android:textColor="@color/secondary_text"
-            android:textSize="@dimen/text_size_content"/>
+            android:paddingTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
+
+
 </LinearLayout>

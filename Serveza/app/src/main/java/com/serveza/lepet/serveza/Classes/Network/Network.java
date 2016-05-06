@@ -7,18 +7,25 @@ import android.telecom.Call;
 import android.util.Log;
 
 import com.serveza.lepet.serveza.Classes.Core;
+import com.serveza.lepet.serveza.Classes.Data.Bar;
 import com.serveza.lepet.serveza.Classes.Data.Beer;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.Classes.Data.User;
 import com.serveza.lepet.serveza.Classes.LocalDatas.DataBase;
+import com.serveza.lepet.serveza.Classes.Network.request.GetBarInfo;
 import com.serveza.lepet.serveza.Classes.Network.request.GetBeerInfo;
 import com.serveza.lepet.serveza.Classes.Network.request.Login;
 import com.serveza.lepet.serveza.Classes.Network.request.Register;
 import com.serveza.lepet.serveza.Classes.Network.request.getAllBeer;
+import com.serveza.lepet.serveza.Classes.Network.request.getBarComment;
 import com.serveza.lepet.serveza.Classes.Network.request.getBeerComment;
+import com.serveza.lepet.serveza.Classes.Network.request.getEventBar;
+import com.serveza.lepet.serveza.Classes.Network.request.getEventList;
+import com.serveza.lepet.serveza.Classes.Network.request.getFavBar;
 import com.serveza.lepet.serveza.Classes.Network.request.getFavBeer;
 import com.serveza.lepet.serveza.Classes.Network.request.getLocalBar;
 import com.serveza.lepet.serveza.Classes.Network.request.sendComment;
+import com.serveza.lepet.serveza.Classes.Network.request.setFavBar;
 import com.serveza.lepet.serveza.Classes.Network.request.setFavBeer;
 import com.serveza.lepet.serveza.Classes.Settings.Settings;
 
@@ -37,6 +44,15 @@ public class Network implements Serializable {
 
     }
 
+    public void GetUserEvent(Context context, Core core, Callable<Integer> callable)
+    {
+        Log.d("Network", "GetUserEvent");
+        getEventList getEventList = new getEventList(context, core, callable);
+        Log.d("Network", "SetParam");
+        getEventList.SetParam(false, Token);
+        Log.d("Network", "Execute");
+        getEventList.execute();
+    }
 
     public void GetInfoBeer(Context context, Core core, Callable<Integer> callable, Beer beer) {
         GetBeerInfo getBeerInfo = new GetBeerInfo(context, core, callable, beer);
@@ -75,10 +91,37 @@ public class Network implements Serializable {
         gfb.execute();
     }
 
+    public void GetFevBars(Context context, Core core, Callable<Integer> callback) {
+        Log.d("Network", "GetFevBars");
+
+        getFavBar gfb = new getFavBar(context, core, callback);
+        gfb.SetParam(Token);
+        gfb.execute();
+    }
+
     public void GetBeerComment(Context context, Core core, Callable<Integer> callable, Beer beer) {
         getBeerComment getBeerComment = new getBeerComment(context, core, callable, beer);
         getBeerComment.execute();
     }
+
+    public void GetBarComment(Context context, Core core, Callable<Integer> callable, Bar bar)
+    {
+        getBarComment getBarComment = new getBarComment(context, core, callable, bar);
+        getBarComment.execute();
+    }
+
+    public void SetFavBar(Context context, Core core, int ID) {
+        setFavBar sfb = new setFavBar(context, core, null);
+        sfb.SetParma(ID, Token);
+        sfb.execute();
+    }
+
+    public void GetBarEvent(Context context, Core core, Callable<Integer>  callable, Bar bar)
+    {
+        getEventBar getEventBar = new getEventBar(context, core, callable, bar);
+        getEventBar.execute();
+    }
+
 
     public void SendComment(Context context, Core core, Callable<Integer> callable, String link, String comment, int note) {
         sendComment sendComment = new sendComment(context, core, link, callable);
@@ -86,7 +129,7 @@ public class Network implements Serializable {
         sendComment.execute();
     }
 
-    public void GetLocalBar(Context context, Core core, Callable<Integer> callable, double longitude, double latitude) {
+    public void GetLocalBar(Context context, Core core, Callable<Integer> callable, double latitude, double longitude) {
         getLocalBar getLocalBar = new getLocalBar(context, core, callable);
         getLocalBar.SetParam(longitude, latitude, Settings.GetRange(context));
         Log.d("GetLocalBar", "execute");

@@ -134,4 +134,8 @@
     <string name="SendText">Send</string>
     <string name="CancelText">Cancel</string>
     <string name="selectyournoteText">Select your note</string>
+    <string name="BeerTitle">Beer</string>
+
+    <string name="NeerBarTitle">Near to me</string>
+    <string name="myEventTitle">My events coming</string>
 </resources>

@@ -5,8 +5,6 @@
     android:orientation="vertical"
     tools:context=".Fragments.HomeFragment">
 
-
-
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
@@ -16,14 +14,43 @@
         android:layout_marginTop="10dp"
         tools:context=".Classes.MapControl.MapsActivity" />
 
+      <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:weightSum="100">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/Event_RecyclerView"
-        android:scrollbars="vertical"
-        android:layout_marginTop="10dp"
-        android:paddingTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/NeerBarTitle"
+                android:textSize="@dimen/text_size_title" />
 
+            <ListView
+                android:id="@+id/ListBarOnFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="20dp"></ListView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/myEventTitle"
+                android:textSize="@dimen/text_size_title" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/Event_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:paddingTop="10dp"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
 
 </LinearLayout>

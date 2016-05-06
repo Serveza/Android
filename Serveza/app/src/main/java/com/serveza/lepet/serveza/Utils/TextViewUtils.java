@@ -9,7 +9,8 @@ public class TextViewUtils {
 
     public static void SetText(TextView textView, String Text)
     {
-        textView.setText(Text);
+        if (textView != null)
+            textView.setText(Text);
     }
     public static String GetText(TextView textView)
     {

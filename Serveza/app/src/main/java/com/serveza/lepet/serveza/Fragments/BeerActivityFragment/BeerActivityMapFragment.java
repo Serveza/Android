@@ -129,7 +129,7 @@ public class BeerActivityMapFragment extends Fragment implements
             public Integer call() throws Exception {
                 return SetBarList();
             }
-        }, currentLongitude, currentLatitude);
+        }, 20.6779049, -103.3569464);
     }
 
     private int SetBarList() {

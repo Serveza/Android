@@ -22,6 +22,10 @@ public class Bar  implements Serializable {
     private double latitude;
     private BeerList beerList;
 
+    public EventList eventList;
+
+    public CommentList commentList;
+
     public Bar(String name, String image, int ID, double longitude, double latitude) {
         this.name = name;
         this.image = image;
@@ -51,10 +55,9 @@ public class Bar  implements Serializable {
         return true;
     }
 
-
-
     public void Carte(JSONArray array) {
         JSONObject tmp;
+        beerList = new BeerList();
         try {
             for (int i = 0; i < array.length(); i++) {
                 tmp = array.getJSONObject(i);
@@ -67,6 +70,19 @@ public class Bar  implements Serializable {
         }
 
     }
+
+    @Override
+    public String toString()
+    {
+        String string = "";
+
+        for (int i = 0; i < beerList.GetList().size(); i++)
+        {
+            string += beerList.GetList().get(i).get_name() + " ";
+        }
+        return  string;
+    }
+
     public Double GetDistanceFrom()
     {
         return 0.0;

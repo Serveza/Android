@@ -49,6 +49,8 @@ public class ImageDownloader extends AsyncTask<Void, Void, Bitmap> {
 
     public static void SetImage(String Url, ImageView imageView)
     {
-       new ImageDownloader(Url, imageView).execute();
+        if (Url == "")
+            return;
+        new ImageDownloader(Url, imageView).execute();
     }
 }

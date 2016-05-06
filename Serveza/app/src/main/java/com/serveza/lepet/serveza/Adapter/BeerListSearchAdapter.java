@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.serveza.lepet.serveza.Activity.BeerActivity;
 import com.serveza.lepet.serveza.Classes.Core;
+import com.serveza.lepet.serveza.Classes.Data.BarList;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.Classes.LocalDatas.DataBase;
 import com.serveza.lepet.serveza.R;
@@ -29,12 +31,15 @@ public class BeerListSearchAdapter extends BaseAdapter {
     private static LayoutInflater inflater = null;
     private Core core;
 
-    public BeerListSearchAdapter(Context context, BeerList beerList, Core core) {
+    public BeerList Return;
+
+    public BeerListSearchAdapter(Context context, BeerList beerList, Core core, BeerList Return) {
         this.beerList = beerList;
         this.context = context;
         this.core = core;
         inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+       this.Return = Return;
     }
 
     public int getCount() {
@@ -55,10 +60,25 @@ public class BeerListSearchAdapter extends BaseAdapter {
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View rowView = inflater.inflate(R.layout.beerlisttemplate, null);
+        View rowView = inflater.inflate(R.layout.beer_list_search_result_template, null);
 
-        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.beerListTemplateName), beerList.GetList().get(position).get_name());
+        TextViewUtils.SetText((TextView) rowView.findViewById(R.id.searchResultName), beerList.GetList().get(position).get_name());
         ImageDownloader.SetImage(beerList.GetList().get(position).get_image(), (ImageView) rowView.findViewById(R.id.beerListTemplateImage));
+
+        CheckBox cb = (CheckBox)rowView.findViewById(R.id.selectBeerCheckBox);
+
+
+        cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+
+                if (checked)
+                    Return.Add(beerList.GetList().get(position));
+                else
+                    Return.GetList().remove(beerList.GetList().get(position));
+            }
+        });
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,8 +95,8 @@ public class BeerListSearchAdapter extends BaseAdapter {
     }
 
 
-    public static void setAdapter(Context context, BeerList beerList, Core core, ListView listView) {
-        BeerListSearchAdapter blsa = new BeerListSearchAdapter(context, beerList, core);
+    public static void setAdapter(Context context, BeerList beerList, Core core, ListView listView, BeerList Return) {
+        BeerListSearchAdapter blsa = new BeerListSearchAdapter(context, beerList, core, Return);
         listView.setAdapter(blsa);
     }
 }

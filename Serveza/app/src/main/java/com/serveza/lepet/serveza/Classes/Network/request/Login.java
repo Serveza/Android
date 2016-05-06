@@ -30,15 +30,24 @@ public class Login extends HttpRequest {
 
     @Override
     protected void onPostExecute(String result) {
-        if (!checkReturnCode())
-            return;
+
         try {
+            if (!checkReturnCode())
+            {
+                core.isConnect = false;
+                if (callback != null)
+                    callback.call();
+                return;
+            }
             JSONObject jsonObj = new JSONObject(result);
             core.user = User.GetUser(jsonObj, (String) urlParameters.get("email"));
             core.network.Token = jsonObj.getString("api_token");
             KeyValue.putValue(context, "api_token", core.network.Token);
+            core.isConnect = true;
             if (callback != null)
                 callback.call();
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {

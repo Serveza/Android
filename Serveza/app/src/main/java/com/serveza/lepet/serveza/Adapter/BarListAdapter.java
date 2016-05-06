@@ -9,10 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.serveza.lepet.serveza.Activity.BeerActivity;
+import com.serveza.lepet.serveza.Activity.BarActivity;
 import com.serveza.lepet.serveza.Classes.Core;
 import com.serveza.lepet.serveza.Classes.Data.BarList;
-import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.R;
 import com.serveza.lepet.serveza.Utils.ImageDownloader;
 import com.serveza.lepet.serveza.Utils.TextViewUtils;
@@ -70,7 +69,7 @@ public class BarListAdapter extends BaseAdapter {
 
         TextViewUtils.SetText((TextView) rowView.findViewById(R.id.BarListTemplateName), barList.getList().get(position).getName());
         TextViewUtils.SetText((TextView) rowView.findViewById(R.id.BarListTemplateDistance),
-                String.valueOf(barList.getList().get(position).GetDistanceFrom()) + "km");
+                String.valueOf(barList.getList().get(position).toString()));
         ImageDownloader.SetImage(barList.getList().get(position).getImage(), (ImageView) rowView.findViewById(R.id.BarListTemplateImage));
 
 
@@ -78,10 +77,11 @@ public class BarListAdapter extends BaseAdapter {
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, BeerActivity.class);
+                Intent intent = new Intent(context, BarActivity.class);
                 intent.putExtra("Bar", barList.getList().get(position));
                 intent.putExtra("Core", core);
-            //    context.startActivity(intent);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
             }
         });
         return rowView;

@@ -1,5 +1,7 @@
 package com.serveza.lepet.serveza.Classes.Data;
 
+import android.util.Log;
+
 import com.serveza.lepet.serveza.Utils.Converter;
 import com.serveza.lepet.serveza.Utils.GetCoor;
 
@@ -59,7 +61,7 @@ public class BarList implements Serializable {
             if (this.list.get(indexBar).ContaineThis(list))
                 barList.Add(this.list.get(indexBar));
         }
-        return this;
+        return barList;
     }
 
     public static BarList GetBarList(JSONArray array) {
@@ -80,4 +82,19 @@ public class BarList implements Serializable {
         return barList;
     }
 
+
+    public  Bar GetBarByUrl(String url)
+    {
+        String[] urlsplit = url.split("/");
+        Log.d("Event", urlsplit[3]);
+        int id = Integer.valueOf(urlsplit[3]);
+
+
+        for (Bar bar: list)
+        {
+            if (bar.getID() == id)
+                return bar;
+        }
+        return null;
+    }
 }

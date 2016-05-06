@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.serveza.lepet.serveza.Activity.BeerActivity;
 import com.serveza.lepet.serveza.Classes.Core;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
+import com.serveza.lepet.serveza.Classes.Data.CommentList;
 import com.serveza.lepet.serveza.R;
 import com.serveza.lepet.serveza.Utils.ImageDownloader;
 import com.serveza.lepet.serveza.Utils.TextViewUtils;
@@ -83,6 +85,11 @@ public class BeerListAdapter extends BaseAdapter {
             }
         });
         return rowView;
+    }
+
+    public static void SetAdapteur(Context context, BeerList list, ListView listView, Core core)
+    {
+        listView.setAdapter(new BeerListAdapter(context, list, core));
     }
 
 }

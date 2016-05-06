@@ -13,6 +13,8 @@ import com.serveza.lepet.serveza.Adapter.BarListAdapter;
 import com.serveza.lepet.serveza.Classes.Core;
 import com.serveza.lepet.serveza.R;
 
+import java.util.concurrent.Callable;
+
 
 public class BarFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -39,17 +41,27 @@ public class BarFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             core = (Core) getArguments().getSerializable("Core");
+            core.network.GetFevBars(this.getContext(), core, new Callable<Integer>() {
+                @Override
+                public Integer call() throws Exception {
+                    return SetBarList();
+                }
+            });
         }
+    }
+
+    private int SetBarList() {
+
+        ListView lv = (ListView) thisView.findViewById(R.id.ListBarOnFragment);
+
+        lv.setAdapter(new BarListAdapter(this.getContext(), core.userBarList, core));
+        return 0;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         thisView = inflater.inflate(R.layout.fragment_bar, container, false);
-
-        ListView lv = (ListView) thisView.findViewById(R.id.ListBarOnFragment);
-
-        lv.setAdapter(new BarListAdapter(this.getContext(), core.userBarList, core));
         return thisView;
     }
 

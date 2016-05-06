@@ -1,5 +1,8 @@
 package com.serveza.lepet.serveza.Classes;
 
+import android.content.Intent;
+
+import com.serveza.lepet.serveza.Activity.HomeActivity;
 import com.serveza.lepet.serveza.Classes.Data.BarList;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
 import com.serveza.lepet.serveza.Classes.Data.EventList;
@@ -14,9 +17,9 @@ import java.io.Serializable;
  */
 public class Core implements Serializable {
 
+    public boolean isConnect;
     public User user;
     public Network network;
-    public Settings settings;
 
     public BeerList userBeerList;
     public BarList userBarList;
@@ -30,8 +33,7 @@ public class Core implements Serializable {
     }
 
     public void Init() {
-        // user = User.GetUserLocal();
-        userBarList = BarList.GetDebugBarList();
-        userEventList = EventList.GenerateEventList(userBarList);
+        userBarList = null;
+
     }
 }

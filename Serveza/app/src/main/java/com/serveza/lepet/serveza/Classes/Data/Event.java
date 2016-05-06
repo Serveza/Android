@@ -1,5 +1,7 @@
 package com.serveza.lepet.serveza.Classes.Data;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,40 +12,51 @@ import java.util.Date;
 public class Event implements Serializable {
 
     private String name;
-    private Date dateStart;
-    private Date dateEnd;
+    private String dateStart;
+    private String dateEnd;
 
+    private String image;
     private Bar homeBar;
+
+    public String getImage() {
+        return image;
+    }
+
+    public Boolean getShowGo() {
+        return showGo;
+    }
+
+    private Boolean showGo;
 
     private String description;
 
-    public Event(String name, Date dateStart, Date dateEnd, Bar homeBar, String description) {
+    public Event(String name, String dateStart, String dateEnd, Bar homeBar, String description, boolean showGo) {
         this.name = name;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.homeBar = homeBar;
         this.description = description;
+        if (homeBar != null) {
+            Log.d("event bar ", homeBar.getName());
+            if (homeBar.getImage() == null)
+                this.image = "";
+            else
+                this.image = homeBar.getImage();
+        }
+        else
+            this.image = "";
+        this.showGo = showGo;
     }
 
     public String GetDate() {
-        SimpleDateFormat ft =
-                new SimpleDateFormat("E yyyy MM dd 'at' hh:mm");
 
         if (dateStart == dateEnd)
-            return ft.format(dateStart);
-        return ft.format(dateStart) + " to " + ft.format(dateEnd);
+            return dateStart;
+        return dateStart + " to " + dateEnd;
     }
 
     public String getName() {
         return name;
-    }
-
-    public Date getDateStart() {
-        return dateStart;
-    }
-
-    public Date getDateEnd() {
-        return dateEnd;
     }
 
     public Bar getHomeBar() {
