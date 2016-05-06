@@ -15,16 +15,21 @@ import java.util.concurrent.Callable;
 /**
  * Created by lepet on 5/5/2016.
  */
-public class getEventList  extends HttpRequest {
+public class getEventList extends HttpRequest {
 
-    public getEventList(Context context, Core core, Callable<Integer> callable)
-    {
+    private EventList list;
+
+    public getEventList(Context context, Core core, Callable<Integer> callable) {
         super(context, core, "/api/user/notifications", RequestType.GET, callable);
-
+        list = null;
     }
 
-    public void SetParam(boolean update, String Token)
-    {
+    public getEventList(Context context, Core core, Callable<Integer> callable, EventList eventList) {
+        super(context, core, "/api/user/notifications", RequestType.GET, callable);
+        list = eventList;
+    }
+
+    public void SetParam(boolean update, String Token) {
         urlParameters.put("api_token", Token);
         if (update)
             urlParameters.put("update", "true");
@@ -36,10 +41,13 @@ public class getEventList  extends HttpRequest {
             return;
         try {
             JSONObject object = new JSONObject(result);
-            core.userEventList = EventList.GetEventList(object.getJSONArray("notifications"), core.userBarList);
+            if (list != null)
+                list = EventList.GetEventList(object.getJSONArray("notifications"), core.userBarList);
+            else
+                core.userEventList = EventList.GetEventList(object.getJSONArray("notifications"), core.userBarList);
             if (callback != null)
                 callback.call();
-        } catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

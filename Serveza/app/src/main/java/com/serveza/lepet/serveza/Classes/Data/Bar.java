@@ -28,7 +28,10 @@ public class Bar  implements Serializable {
 
     public Bar(String name, String image, int ID, double longitude, double latitude) {
         this.name = name;
-        this.image = image;
+        if (image == null)
+            this.image = "";
+        else
+            this.image = image;
         this.ID = ID;
         this.longitude = longitude;
         this.latitude = latitude;

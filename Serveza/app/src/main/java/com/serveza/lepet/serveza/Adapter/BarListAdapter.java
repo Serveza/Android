@@ -47,19 +47,16 @@ public class BarListAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        // TODO Auto-generated method stub
         return barList.getList().size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return position;
     }
 
@@ -71,7 +68,6 @@ public class BarListAdapter extends BaseAdapter {
         TextViewUtils.SetText((TextView) rowView.findViewById(R.id.BarListTemplateDistance),
                 String.valueOf(barList.getList().get(position).toString()));
         ImageDownloader.SetImage(barList.getList().get(position).getImage(), (ImageView) rowView.findViewById(R.id.BarListTemplateImage));
-
 
 
         rowView.setOnClickListener(new View.OnClickListener() {

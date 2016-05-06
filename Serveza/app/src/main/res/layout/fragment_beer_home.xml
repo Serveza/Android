@@ -1,22 +1,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.BeerActivityFragment.BeerHomeFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Fragments.BeerActivityFragment.BeerHomeFragment">
 
-      <LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
 
-        <ImageView
+        <com.pkmmte.view.CircularImageView
             android:id="@+id/BeerImage"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_launcher"
+            app:border="true"
+            app:border_color="#EEEEEE"
+            app:border_width="1dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,21 +56,23 @@
 
 
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="Description"
             android:textColor="@color/primary_text"
-            android:textSize="@dimen/text_size_title"/>
+            android:textSize="@dimen/text_size_title" />
 
         <TextView
             android:id="@+id/BeerInformation"
@@ -75,6 +81,6 @@
             android:layout_marginTop="10dp"
             android:text="Description"
             android:textColor="@color/secondary_text"
-            android:textSize="@dimen/text_size_content"/>
+            android:textSize="@dimen/text_size_content" />
     </LinearLayout>
 </LinearLayout>

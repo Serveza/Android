@@ -28,7 +28,6 @@
     <string name="go_event">Go</string>
     <string name="show_bar_event">Show Bar</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_beer">BeerActivity</string>
     <string name="large_text">
@@ -138,4 +137,8 @@
 
     <string name="NeerBarTitle">Near to me</string>
     <string name="myEventTitle">My events coming</string>
+
+    <string name="facebook_app_id">820916864694793</string>
+    <string name="fb_login_protocol_scheme">fb820916864694793</string>
+    <string name="google_app_id">AIzaSyDbcT0OF-6PnppwRvtHS-Mec2qk8Sui3XY</string>
 </resources>

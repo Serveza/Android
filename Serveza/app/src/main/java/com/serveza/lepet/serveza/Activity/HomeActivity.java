@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -30,6 +29,7 @@ import com.serveza.lepet.serveza.Fragments.HistoryFragment;
 import com.serveza.lepet.serveza.Fragments.HomeFragment;
 import com.serveza.lepet.serveza.Fragments.ManageFragment;
 import com.serveza.lepet.serveza.R;
+import com.serveza.lepet.serveza.Services.ServezaNotificationService;
 import com.serveza.lepet.serveza.Utils.ImageDownloader;
 
 public class HomeActivity extends AppCompatActivity
@@ -89,7 +89,9 @@ public class HomeActivity extends AppCompatActivity
     private void Init() {
         Intent i = getIntent();
         core = (Core) i.getSerializableExtra("Core");
-
+        Intent intent = new Intent(this, ServezaNotificationService.class);
+        intent.putExtra("Core", core);
+        startService(intent);
     }
 
     private void SetElement() {

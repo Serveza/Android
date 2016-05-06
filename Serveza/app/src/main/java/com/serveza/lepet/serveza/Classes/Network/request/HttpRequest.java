@@ -33,7 +33,7 @@ import java.util.concurrent.Callable;
 
 public abstract class HttpRequest extends AsyncTask<String, Void, String> {
     public Callable<Integer> callback;
-    protected static String UrlBase = "http://caron-thomas.eu:5010";
+    protected static String UrlBase = "http://37.187.4.92:5010";
     protected String UrlFinal;
     protected Map<String, Object> urlParameters;
     protected Context context;

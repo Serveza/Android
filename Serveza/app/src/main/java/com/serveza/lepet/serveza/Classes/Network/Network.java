@@ -10,6 +10,7 @@ import com.serveza.lepet.serveza.Classes.Core;
 import com.serveza.lepet.serveza.Classes.Data.Bar;
 import com.serveza.lepet.serveza.Classes.Data.Beer;
 import com.serveza.lepet.serveza.Classes.Data.BeerList;
+import com.serveza.lepet.serveza.Classes.Data.EventList;
 import com.serveza.lepet.serveza.Classes.Data.User;
 import com.serveza.lepet.serveza.Classes.LocalDatas.DataBase;
 import com.serveza.lepet.serveza.Classes.Network.request.GetBarInfo;
@@ -28,6 +29,7 @@ import com.serveza.lepet.serveza.Classes.Network.request.sendComment;
 import com.serveza.lepet.serveza.Classes.Network.request.setFavBar;
 import com.serveza.lepet.serveza.Classes.Network.request.setFavBeer;
 import com.serveza.lepet.serveza.Classes.Settings.Settings;
+import com.serveza.lepet.serveza.Utils.FacebookUtils;
 
 import java.io.Serializable;
 import java.lang.ref.Reference;
@@ -46,11 +48,15 @@ public class Network implements Serializable {
 
     public void GetUserEvent(Context context, Core core, Callable<Integer> callable)
     {
-        Log.d("Network", "GetUserEvent");
         getEventList getEventList = new getEventList(context, core, callable);
-        Log.d("Network", "SetParam");
         getEventList.SetParam(false, Token);
-        Log.d("Network", "Execute");
+        getEventList.execute();
+    }
+
+    public static void GetUserEventUpdate(Context context, String token, Callable<Integer> callable, EventList eventList)
+    {
+        getEventList getEventList = new getEventList(context, null, callable, eventList);
+        getEventList.SetParam(true, token);
         getEventList.execute();
     }
 
@@ -75,6 +81,12 @@ public class Network implements Serializable {
     public void Register(Context context, Core core, String mail, String firstname, String lastname, String passworld, String image, Callable<Integer> callable) {
         Register register = new Register(context, core, callable);
         register.SetParam(mail, firstname, lastname, passworld, image);
+        register.execute();
+    }
+
+    public void Register(Context context, Core core, FacebookUtils fbu, Callable<Integer> callable) {
+        Register register = new Register(context, core, callable);
+        register.SetParam(fbu.mail, fbu.first_name, fbu.last_name, String.valueOf(fbu.id), fbu.image);
         register.execute();
     }
 

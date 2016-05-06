@@ -44,6 +44,8 @@ public class ImageDownloader extends AsyncTask<Void, Void, Bitmap> {
     protected void onPostExecute(Bitmap result) {
         super.onPostExecute(result);
         Log.d("ImageDownloader", "Set Image");
+        if (result == null)
+            return;
         imageView.setImageBitmap(result);
     }
 
